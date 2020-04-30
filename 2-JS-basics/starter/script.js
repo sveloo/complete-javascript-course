@@ -96,32 +96,74 @@ In the end, John would like to have 2 arrays:
 GOOD LUCK 😀
 */
 
-var tips = [];
-var totals = [];
+// var tips = [];
+// var totals = [];
 
-var tip;
+// var tip;
 
-function pushResults(tip, total) {
-  tips.push(tip);
-  totals.push(total);
+// function pushResults(tip, total) {
+//   tips.push(tip);
+//   totals.push(total);
+// }
+
+// function calcTip(bill) {
+//   if (bill < 50) {
+//     tip = bill * 0.2;
+//     total = bill + tip;
+//   } else if (bill >= 50 && bill < 200) {
+//     tip = bill * 0.15;
+//     total = bill + tip;
+//   } else {
+//     tip = bill * 0.1;
+//     total = bill + tip;
+//   }
+//   return pushResults(tip, total);
+// }
+
+// calcTip(124);
+// calcTip(48);
+// calcTip(268);
+// console.log(tips);
+// console.log(totals);
+
+/*
+Let's remember the first coding challenge where Mark and John compared their BMIs. Let's now implement the same functionality with objects and methods.
+1. For each of them, create an object with properties for their full name, mass, and height
+2. Then, add a method to each object to calculate the BMI. Save the BMI to the object and also return it from the method.
+3. In the end, log to the console who has the highest BMI, together with the full name and the respective BMI. Don't forget they might have the same BMI.
+
+Remember: BMI = mass / height^2 = mass / (height * height). (mass in kg and height in meter).
+
+GOOD LUCK 😀
+*/
+
+var mark = {
+  fullName: "Mark Wahlberg",
+  mass: 200,
+  height: 1.7,
+  calcBmi: function (mass, height) {
+    this.bmi = this.mass / (this.height * this.height);
+    return this.bmi;
+  },
+};
+
+var john = {
+  fullName: "Kevin Hart",
+  mass: 200,
+  height: 1.7,
+  calcBmi: function () {
+    this.bmi = this.mass / (this.height * this.height);
+    return this.bmi;
+  },
+};
+
+if (mark.calcBmi() > john.calcBmi()) {
+  console.log(mark.bmi, john.bmi);
+  console.log("Mark's BMI is higher than John's");
+} else if (john.calcBmi() > mark.calcBmi()) {
+  console.log(mark.bmi, john.bmi);
+  console.log("Mark's BMI is higher than John's");
+} else {
+  console.log(mark.bmi, john.bmi);
+  console.log("Mark's BMI is equal to John's");
 }
-
-function calcTip(bill) {
-  if (bill < 50) {
-    tip = bill * 0.2;
-    total = bill + tip;
-  } else if (bill >= 50 && bill < 200) {
-    tip = bill * 0.15;
-    total = bill + tip;
-  } else {
-    tip = bill * 0.1;
-    total = bill + tip;
-  }
-  return pushResults(tip, total);
-}
-
-calcTip(124);
-calcTip(48);
-calcTip(268);
-console.log(tips);
-console.log(totals);
