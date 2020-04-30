@@ -44,36 +44,84 @@ John and Mike both play basketball in different teams. In the latest 3 games, Jo
 GOOD LUCK 😀
 */
 
-johnAverage = (89 + 120 + 103) / 3;
-mikeAverage = (116 + 94 + 123) / 3;
-maryAverage = (400 + 134 + 105) / 3;
+// johnAverage = (89 + 120 + 103) / 3;
+// mikeAverage = (116 + 94 + 123) / 3;
+// maryAverage = (400 + 134 + 105) / 3;
 
-if (johnAverage > mikeAverage && johnAverage > maryAverage) {
-  console.log(
-    johnAverage,
-    mikeAverage,
-    maryAverage,
-    "John has the highest average!"
-  );
-} else if (mikeAverage > johnAverage && mikeAverage > maryAverage) {
-  console.log(
-    johnAverage,
-    mikeAverage,
-    maryAverage,
-    "Mike has the highest average!"
-  );
-} else if (maryAverage > johnAverage && maryAverage > mikeAverage) {
-  console.log(
-    johnAverage,
-    mikeAverage,
-    maryAverage,
-    "Mary has the highest average!"
-  );
-} else {
-  console.log(
-    johnAverage,
-    mikeAverage,
-    maryAverage,
-    "Mike, John & Mary have the same average!"
-  );
+// if (johnAverage > mikeAverage && johnAverage > maryAverage) {
+//   console.log(
+//     johnAverage,
+//     mikeAverage,
+//     maryAverage,
+//     "John has the highest average!"
+//   );
+// } else if (mikeAverage > johnAverage && mikeAverage > maryAverage) {
+//   console.log(
+//     johnAverage,
+//     mikeAverage,
+//     maryAverage,
+//     "Mike has the highest average!"
+//   );
+// } else if (maryAverage > johnAverage && maryAverage > mikeAverage) {
+//   console.log(
+//     johnAverage,
+//     mikeAverage,
+//     maryAverage,
+//     "Mary has the highest average!"
+//   );
+// } else {
+//   console.log(
+//     johnAverage,
+//     mikeAverage,
+//     maryAverage,
+//     "Mike, John & Mary have the same average!"
+//   );
+// }
+
+/*****************************
+ * CODING CHALLENGE 3
+ */
+
+/*
+John and his family went on a holiday and went to 3 different restaurants. The bills were $124, $48 and $268.
+
+To tip the waiter a fair amount, John created a simple tip calculator (as a function). He likes to tip 20% of the bill when the bill is less than $50, 15% when the bill is between $50 and $200, and 10% if the bill is more than $200.
+
+In the end, John would like to have 2 arrays:
+1) Containing all three tips (one for each bill)
+2) Containing all three final paid amounts (bill + tip).
+
+(NOTE: To calculate 20% of a value, simply multiply it with 20/100 = 0.2)
+
+GOOD LUCK 😀
+*/
+
+var tips = [];
+var totals = [];
+
+var tip;
+
+function pushResults(tip, total) {
+  tips.push(tip);
+  totals.push(total);
 }
+
+function calcTip(bill) {
+  if (bill < 50) {
+    tip = bill * 0.2;
+    total = bill + tip;
+  } else if (bill >= 50 && bill < 200) {
+    tip = bill * 0.15;
+    total = bill + tip;
+  } else {
+    tip = bill * 0.1;
+    total = bill + tip;
+  }
+  return pushResults(tip, total);
+}
+
+calcTip(124);
+calcTip(48);
+calcTip(268);
+console.log(tips);
+console.log(totals);
