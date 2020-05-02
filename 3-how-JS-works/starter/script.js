@@ -1,25 +1,14 @@
 ///////////////////////////////////////
 // Lecture: Hoisting
 
+function calcAge(year) {
+  console.log(2020 - year);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+calcAge(1976);
 
 ///////////////////////////////////////
 // Lecture: Scoping
-
 
 // First scoping example
 
@@ -37,8 +26,6 @@ function first() {
     }
 }
 */
-
-
 
 // Example to show the differece between execution stack and scope chain
 
@@ -62,16 +49,5 @@ function third() {
 }
 */
 
-
-
 ///////////////////////////////////////
 // Lecture: The this keyword
-
-
-
-
-
-
-
-
-
