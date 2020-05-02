@@ -8,16 +8,30 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
+/*
+YOUR 3 CHALLENGES
+Change the game to follow these rules:
 
-var scores, roundScore, activePlayer, dice, gamePlaying;
+1. A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn. (Hint: Always save the previous dice roll in a separate variable)
+
+
+2. Add an input field to the HTML where players can set the winning score, so that they can change the predefined score of 100. (Hint: you can read that value with the .value property in JavaScript. This is a good oportunity to use google to figure this out :)
+
+
+3. Add another dice to the game, so that there are two dices now. The player looses his current score when one of them is a 1. (Hint: you will need CSS to position the second dice, so take a look at the CSS code for the first one.)
+*/
+
+var scores, roundScore, activePlayer, dice, gamePlaying, winScore;
 
 function init() {
   scores = [0, 0];
   roundScore = 0;
   activePlayer = 0;
   gamePlaying = true;
+  lastRoll = 0;
 
-  document.querySelector(".dice").style.display = "none";
+  document.getElementById("dice-1").style.display = "none";
+  document.getElementById("dice-2").style.display = "none";
   document.getElementById("score-0").textContent = "0";
   document.getElementById("score-1").textContent = "0";
   document.getElementById("current-0").textContent = "0";
@@ -43,33 +57,58 @@ function nextPlayer() {
   document.getElementById("current-1").textContent = "0";
   document.querySelector(".player-0-panel").classList.toggle("active");
   document.querySelector(".player-1-panel").classList.toggle("active");
+  //   document.getElementById("dice-1").style.display = "none";
+  //   document.getElementById("dice-2").style.display = "none";
 }
 
-function finishGame() {
-  gamePlaying = false;
-  document.querySelector(".btn-hold").style.display = "none";
-  document.querySelector(".btn-roll").style.display = "none";
-}
 document.querySelector(".btn-roll").addEventListener("click", function () {
   if (gamePlaying) {
     // generate a random number
-    dice = Math.floor(Math.random() * 6) + 1;
+    var dice1 = Math.floor(Math.random() * 6) + 1;
+    var dice2 = Math.floor(Math.random() * 6) + 1;
     // display the result
-    var diceDom = document.querySelector(".dice");
-    diceDom.style.display = "block";
-    diceDom.src = "dice-" + dice + ".png";
+    document.getElementById("dice-1").style.display = "block";
+    document.getElementById("dice-2").style.display = "block";
+
+    document.getElementById("dice-1").src = "dice-" + dice1 + ".png";
+    document.getElementById("dice-2").src = "dice-" + dice2 + ".png";
     // update round score if rolled number is not 1
 
-    if (dice !== 1) {
-      // add score
-      roundScore += dice;
+    if (dice1 !== 1 && dice2 !== 1) {
+      roundScore += dice1 + dice2;
+
       document.querySelector(
         "#current-" + activePlayer
       ).textContent = roundScore;
+    } else if (dice1 === 6 && dice2 === 6) {
+      // lose
+      console.log("You rolled two 6s ya lose ya score!");
+      document.querySelector("#current-" + activePlayer).textContent = 0;
+      nextPlayer();
     } else {
       // next player
+      console.log("You rolled a double ONEs");
       nextPlayer();
     }
+
+    // if (dice1 === 6 && dice2 === 6) {
+    //   // lose
+    //   console.log("You rolled two 6s ya lose ya score!");
+    //   document.querySelector("#current-" + activePlayer).textContent = 0;
+    //   nextPlayer();
+    // } else if (dice1 !== 1) {
+    //   // add score
+    //   roundScore += dice;
+    //   document.querySelector(
+    //     "#current-" + activePlayer
+    //   ).textContent = roundScore;
+    // } else {
+    //   // next player
+    //   console.log("You rolled a 1");
+    //   nextPlayer();
+    // }
+
+    // lastRoll = dice;
   }
 });
 
@@ -82,8 +121,17 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
     document.querySelector("#score-" + activePlayer).textContent =
       scores[activePlayer];
 
+    var input = document.querySelector(".input-form").value;
+    console.log(input);
+
+    if (input) {
+      var winScore = input;
+    } else {
+      var winScore = 100;
+    }
+
     // Check if player has won -> end game or switch player
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= winScore) {
       document.querySelector("#name-" + activePlayer).textContent = "WINNER!";
       document
         .querySelector(".player-" + activePlayer + "-panel")
@@ -91,7 +139,9 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
       document
         .querySelector(".player-" + activePlayer + "-panel")
         .classList.remove("active");
-      finishGame();
+      gamePlaying = false;
+      document.getElementById("dice-1").style.display = "none";
+      document.getElementById("dice-2").style.display = "none";
     } else {
       nextPlayer();
     }
