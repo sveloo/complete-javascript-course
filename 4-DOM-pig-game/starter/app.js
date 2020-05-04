@@ -90,25 +90,6 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
       console.log("You rolled a double ONEs");
       nextPlayer();
     }
-
-    // if (dice1 === 6 && dice2 === 6) {
-    //   // lose
-    //   console.log("You rolled two 6s ya lose ya score!");
-    //   document.querySelector("#current-" + activePlayer).textContent = 0;
-    //   nextPlayer();
-    // } else if (dice1 !== 1) {
-    //   // add score
-    //   roundScore += dice;
-    //   document.querySelector(
-    //     "#current-" + activePlayer
-    //   ).textContent = roundScore;
-    // } else {
-    //   // next player
-    //   console.log("You rolled a 1");
-    //   nextPlayer();
-    // }
-
-    // lastRoll = dice;
   }
 });
 
