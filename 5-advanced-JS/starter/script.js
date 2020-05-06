@@ -1,73 +1,69 @@
-// Function Constructors
+/////////////////////////////
+// CODING CHALLENGE
 
-// Creating using an object literal
-// var sanny = {
-//   name: "Sanny",
-//   yearofBirth: 1976,
-//   job: musician,
-// };
+/*
+--- Let's build a fun quiz game in the console! ---
 
-// Creating using a funciton constructor
-// Function constructors use Capital first letter
+1. Build a function constructor called Question to describe a question. A question should include:
+a) question itself
+b) the answers from which the player can choose the correct one (choose an adequate data structure here, array, object, etc.)
+c) correct answer (I would use a number for this)
 
-// var Person = function (name, yearofBirth, job) {
-//   this.name = name;
-//   this.yearofBirth = yearofBirth;
-//   this.job = job;
-// };
-// // Add function to the Person prototype
-// Person.prototype.calculateAge = function () {
-//   console.log(2020 - this.yearofBirth);
-// };
+2. Create a couple of questions using the constructor
 
-// var sanny = new Person("Sanny", 1976, "Musician");
-// var amy = new Person("Amy", 1986, "PE Teacher");
+3. Store them all inside an array
 
-// console.log(sanny.calculateAge());
-// console.log(amy.calculateAge());
+4. Select one random question and log it on the console, together with the possible answers (each question should have a number) (Hint: write a method for the Question objects for this task).
 
-// Passing function as call back function
+5. Use the 'prompt' function to ask the user for the correct answer. The user should input the number of the correct answer such as you displayed it on Task 4.
 
-// Using Bind
+6. Check if the answer is correct and print to the console whether the answer is correct ot nor (Hint: write another method for this).
 
-var years = [2010, 1990, 1995, 1981, 1976];
+7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
+*/
 
-// function arrayCalc(arr, fn) {
-//   var arrRes = [];
-//   for (i = 0; i < arr.length; i++) {
-//     arrRes.push(fn(arr[i]));
-//   }
-//   return arrRes;
-// }
+(function () {
+  function Question(question, answers, correct) {
+    this.question = question;
+    this.answers = answers;
+    this.correct = correct;
+  }
 
-// function calcAge(year) {
-//   return 2020 - year;
-// }
+  Question.prototype.displayQuestion = function () {
+    console.log(this.question);
+    for (var i = 0; i < this.answers.length; i++) {
+      console.log(i + " : " + this.answers[i]);
+    }
+  };
 
-// function legalAge(year, limit) {
-//   return year >= limit;
-// }
+  var qn1 = new Question(
+    "Do you wanna be a Javascript engineer?",
+    ["Yes", "No"],
+    1
+  );
+  var qn2 = new Question(
+    "Do you want to be a professional musician?",
+    ["Yes", "No"],
+    0
+  );
+  var qn3 = new Question(
+    "Do you truly believe in yourself?",
+    ["Yes", "No", "Not entirely"],
+    0
+  );
 
-// var ages = arrayCalc(years, calcAge);
+  Question.prototype.checkAnswer = function (answer) {
+    if (answer == this.correct) {
+      console.log("Great Answer!");
+    } else {
+      console.log("WRONG ANSWER, but you can keep trying!");
+    }
+  };
 
-// var legalAus = arrayCalc(ages, legalAge.bind(this, 21));
+  var questions = [qn1, qn2, qn3];
+  var n = Math.floor(Math.random() * questions.length);
 
-// console.log(ages);
-// console.log(years);
-// console.log(legalAus);
-
-// function calcHR(el) {
-//   if (el >= 18 && el <= 81) {
-//     return Math.round(206.9 - 0.67 * el);
-//   } else {
-//     return -1;
-//   }
-// }
-
-// var ages = arrayCalc(years, calcAge);
-// var legalAges = arrayCalc(ages, legalAge);
-// var calcMaxHR = arrayCalc(ages, calcHR);
-
-// console.log(ages);
-// console.log(legalAges);
-// console.log(calcMaxHR);
+  questions[n].displayQuestion();
+  var answer = parseInt(prompt("What is your true answer?"));
+  questions[n].checkAnswer(answer);
+})();
